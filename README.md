@@ -49,4 +49,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## Author
 
-Built by [Christian Gonzalez]([https://github.com/your-username](https://github.com/nullbyte4)) as a portfolio project.
+Built by [Christian Gonzalez](https://github.com/nullbyte4) as a portfolio project.
