@@ -1,6 +1,6 @@
 # FinAssist
 
-> Full-stack personal expense tracker with receipt OCR and AI-powered automatic categorization.
+> Expense tracker with receipt OCR and AI-powered automatic categorization.
 
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
 ![License](https://img.shields.io/badge/license-MIT-blue)
