@@ -30,7 +30,7 @@ This is my first full-stack portfolio project, built to consolidate my Python sk
 
 ## Roadmap
 
-- [ ] **Phase 1** — Prerequisites and foundations
+- [x] **Phase 1** — Prerequisites and foundations
 - [ ] **Phase 2** — Project setup (monorepo, Docker, tooling)
 - [ ] **Phase 3** — Backend: models and CRUD endpoints
 - [ ] **Phase 4** — Database and JWT authentication
@@ -41,7 +41,7 @@ This is my first full-stack portfolio project, built to consolidate my Python sk
 
 ## Status
 
-🚧 Currently in **Phase 1 — Foundations**. This README will grow as the project advances.
+🚧 **Phase 1 — Foundations** complete: FastAPI backend structure, first endpoint, and environment configuration with Pydantic Settings. Currently starting **Phase 2 — Project setup** (Docker + PostgreSQL). This README will grow as the project advances.
 
 ## License
 
