@@ -1,0 +1,23 @@
+services:
+  # Database service - PostgreSQL 16
+  db:
+    image: postgres:16
+
+    # These values must match DATABASE_URL in .env
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: finassist
+
+    # Expose Postgres port to the host machine
+    ports:
+      - "5432:5432"
+
+    # Mount named volume so data persists when the container stops
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Named volume definition - Docker manages the storage location
+volumes:
+  postgres_data:
+
