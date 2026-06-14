@@ -17,6 +17,30 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  # Backend service - FastAPI app
+  backend:
+    # Build the image from the Dockerfile in the backend directory
+    build: ./backend
+
+    ports:
+      - "8000:8000"
+
+    # Mount the backend folder so code changes reflect without rebuilding the image
+    volumes:
+      - ./backend:/app
+
+    # Pass environment variables directly — overrides whatever is in .env
+    # Note: hostname is "db" (the service name above), not localhost
+    environment:
+      APP_NAME: FinAssist
+      DEBUG: "true"
+      DATABASE_URL: postgresql+psycopg2://user:password@db:5432/finassist
+      SECRET_KEY: password12345
+
+    # Wait for db to be healthy before starting the backend
+    depends_on:
+      - db
+
 # Named volume definition - Docker manages the storage location
 volumes:
   postgres_data:
