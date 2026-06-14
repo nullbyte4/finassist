@@ -5,43 +5,29 @@ from sqlalchemy import pool
 
 from alembic import context
 
+# SQLModel.metadata holds the table definitions from all imported models
+# Alembic reads this to know what tables exist and detect changes
 from sqlmodel import SQLModel
+
+# Import User so SQLModel registers the table in its metadata
+# Without this import, Alembic wouldn't know the User table exists
 from app.models.user import User
+
+# Import settings to read DATABASE_URL from .env instead of alembic.ini
 from app.core.config import settings
 
-# this is the Alembic Config object, which provides
-# access to the values within the .ini file in use.
+# Alembic Config object — provides access to values in alembic.ini
 config = context.config
 
-# Interpret the config file for Python logging.
-# This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# add your model's MetaData object here
-# for 'autogenerate' support
-# from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
+# Point Alembic to our models so --autogenerate can detect schema changes
 target_metadata = SQLModel.metadata
-
-# other values from the config, defined by the needs of env.py,
-# can be acquired:
-# my_important_option = config.get_main_option("my_important_option")
-# ... etc.
 
 
 def run_migrations_offline() -> None:
-    """Run migrations in 'offline' mode.
-
-    This configures the context with just a URL
-    and not an Engine, though an Engine is acceptable
-    here as well.  By skipping the Engine creation
-    we don't even need a DBAPI to be available.
-
-    Calls to context.execute() here emit the given string to the
-    script output.
-
-    """
+    """Run migrations without a live DB connection — generates raw SQL instead."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -55,12 +41,9 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    """Run migrations in 'online' mode.
-
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-
-    """
+    """Run migrations against a live DB connection."""
+    # Override the URL from alembic.ini with the one from .env
+    # This keeps the real credentials out of version-controlled config files
     config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
