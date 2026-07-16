@@ -8,40 +8,53 @@
 
 ## About the project
 
-FinAssist is a web application that helps users track their personal expenses without the friction of typing everything manually. Users take a picture of a receipt, an OCR pipeline extracts the items and total amount, and an LLM automatically categorizes the expense and generates monthly insights (e.g. "you spent 32% more on food than last month").
+FinAssist is a web application that helps users track their personal expenses without the friction of typing everything manually. Users take a picture of a receipt, an OCR service extracts the items and total amount, and an LLM automatically categorizes the expense and generates simple monthly insights (e.g. "you spent 32% more on food than last month").
 
-This is my first full-stack portfolio project, built to consolidate my Python skills and learn modern web development end-to-end: REST APIs, authentication, databases, frontend, testing, Docker and cloud deployment.
+This is my **first full-stack project**, built to consolidate my Python skills and learn modern web development end-to-end: REST APIs, authentication, databases, frontend, and deployment.
 
-## Tech stack (planned)
+The stack was deliberately kept small on purpose: the goal of v1 is to ship a complete, working product with a limited set of new tools, rather than to learn every tool at once. More advanced tooling (TypeScript, Docker, CI/CD, PostgreSQL) is planned as a v2 once the fundamentals are solid — see [Roadmap](#roadmap) and [Future improvements](#future-improvements-v2).
+
+## Tech stack
 
 | Layer       | Technology                              |
-|-------------|-----------------------------------------|
+|-------------|------------------------------------------|
 | Backend     | FastAPI (Python 3.12+)                  |
-| Database    | PostgreSQL + SQLModel + Alembic         |
-| Frontend    | Next.js 15 + TypeScript + Tailwind CSS  |
-| Auth        | JWT (python-jose + passlib/bcrypt)      |
-| AI          | OpenAI API (structured outputs)         |
-| OCR         | Tesseract (with Google Vision fallback) |
-| Testing     | pytest, pytest-asyncio, httpx           |
-| DevOps      | Docker, GitHub Actions                  |
-| Deployment  | Vercel (frontend) + Railway/Render (backend) + Neon (DB) |
+| Database    | SQLite + SQLModel                       |
+| Frontend    | Next.js 15 + JavaScript + Tailwind CSS  |
+| Auth        | JWT (basic login/register, no refresh tokens yet) |
+| AI          | OpenAI API (categorization + insights)  |
+| OCR         | Google Vision API (or OpenAI Vision)    |
+| Testing     | pytest                                  |
+| Deployment  | Vercel (frontend) + Render (backend)    |
 
-> This stack may evolve as the project grows.
+> This stack is intentionally minimal for a first project. See [Future improvements](#future-improvements-v2) for what's planned once v1 is done.
 
 ## Roadmap
 
-- [ ] **Phase 1** — Prerequisites and foundations
-- [ ] **Phase 2** — Project setup (monorepo, Docker, tooling)
-- [ ] **Phase 3** — Backend: models and CRUD endpoints
-- [ ] **Phase 4** — Database and JWT authentication
-- [ ] **Phase 5** — Frontend and full integration (OCR + AI)
-- [ ] **Phase 6** — Testing and code quality
-- [ ] **Phase 7** — Deployment (CI/CD + cloud)
-- [ ] **Phase 8** — Final polish (docs, demo video, blog post)
+- [ ] **Phase 0** — Project setup: monorepo folder structure, Python virtual environment, base dependencies, minimal FastAPI app with a `/health` endpoint, environment variables config, Git repo initialized and pushed
+- [ ] **Phase 1** — Backend: FinAssist models (expenses, categories, users) + CRUD endpoints, with basic pytest tests per endpoint
+- [ ] **Phase 2** — Basic authentication (register/login with JWT), with tests for the auth flow
+- [ ] **Phase 3** — OCR integration: upload a photo → extracted text (tested standalone before touching the frontend)
+- [ ] **Phase 4** — AI integration: extracted text → structured categorization (JSON)
+- [ ] **Phase 5** — Frontend (Next.js + JS): login, upload receipt, view list of expenses
+- [ ] **Phase 6** — Simple dashboard with insights (totals per category, then month-over-month comparison)
+- [ ] **Phase 7** — Testing pass: review overall coverage, fill gaps and add edge cases for critical endpoints
+- [ ] **Phase 8** — Deployment (Vercel + Render)
+
+## Future improvements (v2)
+
+Once v1 is complete and working end-to-end, the plan is to gradually level up the stack:
+
+- Migrate frontend from JavaScript to **TypeScript**
+- Migrate database from **SQLite to PostgreSQL** (with Alembic migrations)
+- Add **Docker** for local development and reproducible environments
+- Add **CI/CD** with GitHub Actions
+- Improve auth with refresh tokens
+- Add a Tesseract fallback (or evaluate if it's actually worth the added complexity)
 
 ## Status
 
-🚧 Currently in **Phase 1 — Foundations**. This README will grow as the project advances.
+🚧 Currently in **Phase 0 — Project setup**. This README will grow as the project advances.
 
 ## License
 
