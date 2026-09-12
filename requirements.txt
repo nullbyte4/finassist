@@ -1,0 +1,7 @@
+#libraries for FastAPI project
+fastapi
+uvicorn[standard]
+sqlmodel
+jinja2
+ruff
+pytest
