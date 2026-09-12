@@ -1,60 +1,98 @@
 # FinAssist
 
-> Expense tracker with receipt OCR and AI-powered automatic categorization.
+> Personal finance tracker for income and expenses with receipt OCR and AI-powered categorization.
 
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
-![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.12+-blue)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 ## About the project
 
-FinAssist is a web application that helps users track their personal expenses without the friction of typing everything manually. Users take a picture of a receipt, an OCR service extracts the items and total amount, and an LLM automatically categorizes the expense and generates simple monthly insights (e.g. "you spent 32% more on food than last month").
+FinAssist is a web application designed to track personal finances—both earnings (salary, extra income) and expenses—without the hassle of manual data entry. Users can log their income, upload pictures of purchase receipts, and let AI extract key details (store name, items, total, date) and automatically assign a category. A clean monthly dashboard provides an instant overview of total income, spending by category, and savings.
 
-This is my **first full-stack project**, built to consolidate my Python skills and learn modern web development end-to-end: REST APIs, authentication, databases, frontend, and deployment.
+This is my **first software engineering project**, built with a primary focus: **to learn and master Python fundamentals** while building a complete, real-world application from scratch.
 
-The stack was deliberately kept small on purpose: the goal of v1 is to ship a complete, working product with a limited set of new tools, rather than to learn every tool at once. More advanced tooling (TypeScript, Docker, CI/CD, PostgreSQL) is planned as a v2 once the fundamentals are solid — see [Roadmap](#roadmap) and [Future improvements](#future-improvements-v2).
+To keep the learning curve manageable and avoid cognitive overload, the stack avoids complex JavaScript frameworks. Everything runs on Python, using clean HTML templates and lightweight styling so effort remains 100% focused on backend architecture, database modeling, and software engineering best practices.
 
 ## Tech stack
 
-| Layer       | Technology                              |
-|-------------|------------------------------------------|
-| Backend     | FastAPI (Python 3.12+)                  |
-| Database    | SQLite + SQLModel                       |
-| Frontend    | Next.js 15 + JavaScript + Tailwind CSS  |
-| Auth        | JWT (basic login/register, no refresh tokens yet) |
-| AI          | OpenAI API (categorization + insights)  |
-| OCR         | Google Vision API (or OpenAI Vision)    |
-| Testing     | pytest                                  |
-| Deployment  | Vercel (frontend) + Render (backend)    |
+| Layer | Technology | Rationale |
+|---|---|---|
+| **Language** | Python 3.12+ | Core learning objective and foundation of the project |
+| **Backend & Web** | FastAPI | Modern, fast, intuitive Python web framework with automatic OpenAPI docs |
+| **Templates & UI** | Jinja2 + Tailwind CSS (CDN) | Clean web interface rendered directly with Python—no Node.js/JS build toolchain |
+| **Database** | SQLite + SQLModel | Zero-configuration file database combining Pydantic validation with SQLAlchemy |
+| **AI & OCR** | OpenAI API (Vision & Structured Outputs) | Multimodal model to read receipt images and return structured financial data |
+| **Testing** | pytest | Industry-standard Python testing tool to ensure correctness |
+| **Deployment** | Render | Simple cloud hosting for Python web applications |
 
-> This stack is intentionally minimal for a first project. See [Future improvements](#future-improvements-v2) for what's planned once v1 is done.
+## Project skills
+
+Local Copilot skills configured in `.agents/skills/`:
+
+- `best-practices` — Clean code standards, meaningful naming, disciplined function design, robust error handling, secure secrets management, and test quality.
+- `devlog-logging` — Running development log and session tracking in `DEVLOG.md`.
+- `direct-mode` — Plan-first execution workflow with handoff review before Git operations.
+- `git-workflow` — Feature branch workflow, local merges, and strict prohibition of AI commit co-author attribution.
+- `mainframe-wiki` — Cross-project consultation of the personal knowledge base (`themainframe`).
+- `mentor-mode` — Guided learning workflow where Christian writes the code and Copilot reviews.
+- `new-project-kickoff` — Phase 0 context and planning framework with roadmap tracking.
 
 ## Roadmap
 
-- [ ] **Phase 0** — Project setup: monorepo folder structure, Python virtual environment, base dependencies, minimal FastAPI app with a `/health` endpoint, environment variables config, Git repo initialized and pushed
-- [ ] **Phase 1** — Backend: FinAssist models (expenses, categories, users) + CRUD endpoints, with basic pytest tests per endpoint
-- [ ] **Phase 2** — Basic authentication (register/login with JWT), with tests for the auth flow
-- [ ] **Phase 3** — OCR integration: upload a photo → extracted text (tested standalone before touching the frontend)
-- [ ] **Phase 4** — AI integration: extracted text → structured categorization (JSON)
-- [ ] **Phase 5** — Frontend (Next.js + JS): login, upload receipt, view list of expenses
-- [ ] **Phase 6** — Simple dashboard with insights (totals per category, then month-over-month comparison)
-- [ ] **Phase 7** — Testing pass: review overall coverage, fill gaps and add edge cases for critical endpoints
-- [ ] **Phase 8** — Deployment (Vercel + Render)
+- [ ] **Phase 0 — Project Setup & Environment**
+  - Set up Python virtual environment (`venv`) and package dependencies (`fastapi`, `uvicorn`, `sqlmodel`, `jinja2`, `ruff`, `pytest`)
+  - Create project folder structure (`app/`, `templates/`, `static/`, `tests/`)
+  - Build minimal FastAPI app with a `GET /health` endpoint and initial home template
+  - Configure `.env.example` and verify `.gitignore`
+
+- [ ] **Phase 1 — Data Models & Database**
+  - Design SQLModel entities: `Income`, `Expense`, and `Category`
+  - Initialize local SQLite database and connection session management
+  - Write unit tests in `pytest` verifying database CRUD operations
+
+- [ ] **Phase 2 — Manual Tracking Web UI**
+  - Build web pages to record income (e.g., salary, freelance) and view income history
+  - Build form to manually log an expense with category selection
+  - List transactions with basic filtering by month
+
+- [ ] **Phase 3 — Receipt OCR & AI Extraction**
+  - Create a standalone Python module to process receipt images via OpenAI Vision API
+  - Extract structured JSON (merchant, date, total amount, suggested category)
+  - Write test cases with sample receipts to validate accuracy and error handling
+
+- [ ] **Phase 4 — End-to-End Expense Flow**
+  - Add receipt upload component in the web interface
+  - Display extracted receipt data in a confirmation form before saving
+  - Save confirmed expense to the database linked to its image/record
+
+- [ ] **Phase 5 — Monthly Dashboard & Insights**
+  - Calculate monthly summary: Total Income, Total Expenses, Net Savings
+  - Display expense distribution by category
+  - Simple comparison against previous month (e.g., spending trends)
+
+- [ ] **Phase 6 — Testing & Refactoring**
+  - Review test coverage across routes and services
+  - Refactor code for clarity, error handling, and type safety
+
+- [ ] **Phase 7 — Cloud Deployment**
+  - Prepare production configuration (`render.yaml` or Procfile, requirements lock)
+  - Configure persistent storage for SQLite/receipt images
+  - Deploy to Render and verify live health and functionality
 
 ## Future improvements (v2)
 
-Once v1 is complete and working end-to-end, the plan is to gradually level up the stack:
+Planned enhancements once the core application is running smoothly:
 
-- Migrate frontend from JavaScript to **TypeScript**
-- Migrate database from **SQLite to PostgreSQL** (with Alembic migrations)
-- Add **Docker** for local development and reproducible environments
-- Add **CI/CD** with GitHub Actions
-- Improve auth with refresh tokens
-- Add a Tesseract fallback (or evaluate if it's actually worth the added complexity)
+- User authentication & multi-user support (JWT / session auth)
+- Budgeting goals and spending alert limits
+- Data export (CSV / PDF monthly reports)
+- Dedicated modern frontend (Next.js / React) after mastering Python fundamentals
+- Migration from SQLite to PostgreSQL
 
 ## Status
 
-🚧 Currently in **Phase 0 — Project setup**. This README will grow as the project advances.
+🚧 Currently in **Phase 0 — Project Setup**.
 
 ## License
 
@@ -62,4 +100,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## Author
 
-Built by [Christian Gonzalez](https://github.com/nullbyte4) as a portfolio project.
+Built by [Christian Gonzalez](https://github.com/nullbyte4) as a portfolio and software engineering learning project.
