@@ -46,7 +46,7 @@ Local Copilot skills configured in `.agents/skills/`:
   - Build minimal FastAPI app with a `GET /health` endpoint and initial home template
   - Configure `.env.example` and verify `.gitignore`
 
-- [ ] **Phase 1 — Data Models & Database**
+- [x] **Phase 1 — Data Models & Database**
   - Design SQLModel entities: `Income`, `Expense`, and `Category`
   - Initialize local SQLite database and connection session management
   - Write unit tests in `pytest` verifying database CRUD operations
@@ -92,7 +92,7 @@ Planned enhancements once the core application is running smoothly:
 
 ## Status
 
-🚧 Currently in **Phase 1 — Data Models & Database**.
+🚧 Currently in **Phase 2 — Manual Tracking Web UI**.
 
 ## License
 
