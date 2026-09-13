@@ -40,7 +40,7 @@ Local Copilot skills configured in `.agents/skills/`:
 
 ## Roadmap
 
-- [ ] **Phase 0 — Project Setup & Environment**
+- [x] **Phase 0 — Project Setup & Environment**
   - Set up Python virtual environment (`venv`) and package dependencies (`fastapi`, `uvicorn`, `sqlmodel`, `jinja2`, `ruff`, `pytest`)
   - Create project folder structure (`app/`, `templates/`, `static/`, `tests/`)
   - Build minimal FastAPI app with a `GET /health` endpoint and initial home template
@@ -92,7 +92,7 @@ Planned enhancements once the core application is running smoothly:
 
 ## Status
 
-🚧 Currently in **Phase 0 — Project Setup**.
+🚧 Currently in **Phase 1 — Data Models & Database**.
 
 ## License
 
